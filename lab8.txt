@@ -1,0 +1,126 @@
+	var myClosure = (function outerFunction() {
+ 
+  
+		var hidden = 1;
+ 
+  return {
+
+		    inc: function innerFunction() {
+
+		      return hidden++;
+ 
+		   }
+ 
+	 };
+ 
+}());
+
+	------------------------------------------
+
+	myClosure.inc();
+
+	------------------------------------------
+
+	var foo = 1;
+	var bar = 2;
+ 
+	function myFunc() {
+  		//-- определяем переменные, локальные для функции
+ 		var a = 1;
+ 		var b = 2;
+  		var foo = 3;
+ 
+  	console.log("inside myFunc");
+	}
+ 
+	console.log("outside");
+ 
+	//-- и вызываем функцию
+	myFunc();
+
+	------------------------------------------
+
+	function createCounter(initial) {
+  //-- переменная, локальная для функции
+  		var counter = initial;
+ 
+  //-- Вложенные функции. У каждой есть
+  //   ссылка на текущий scope-объект (объект области видимости)
+ 
+  /**
+   * Увеличивает внутренний счетчит на переданное значение.
+   * Если число не конечное или меньше 1 — использует 1.
+   */
+ 	 function increment(value) {
+  		 if (!isFinite(value) || value < 1){
+   		 value = 1;
+ 		 }
+    	counter += value;
+  	}
+ 
+  /**
+   * Возвращает текущее значение счетчика.
+   */
+	  function get() {
+  		  return counter;
+ 	  }
+ 
+  //-- возвращает объект, содержащий ссылки
+  //   на вложенные функции
+	  return {
+   		 increment: increment,
+  	  get: get
+  	};
+}
+ 
+//-- создаем объект Счетчик
+
+	----------	
+
+	var myCounter = createCounter(100);
+ 
+	console.log(myCounter.get());   //-- выводит "100"
+ 
+	myCounter.increment(5);
+	console.log(myCounter.get());   //-- выводит "105"
+
+	-------------------------------------------
+
+	function createCounter(initial) {
+  //-- переменная, локальная для функции
+  		var counter = initial;
+ 
+  //-- Вложенные функции. У каждой есть
+  //   ссылка на текущий scope-объект (объект области видимости)
+ 
+  /**
+   * Увеличивает внутренний счетчит на переданное значение.
+   * Если число не конечное или меньше 1 — использует 1.
+   */
+ 	 function increment(value) {
+  		 if (!isFinite(value) || value < 1){
+   		 value = 1;
+ 		 }
+    	counter += value;
+  	}
+ 
+  /**
+   * Возвращает текущее значение счетчика.
+   */
+	  function get() {
+  		  return counter;
+ 	  }
+
+	 function gettwo(){
+		return counter * 2;
+	}
+ 
+  //-- возвращает объект, содержащий ссылки
+  //   на вложенные функции
+	  return {
+   		 increment: increment,
+  	  get: get
+  	};
+}
+
+------------------------------------------------------
